@@ -1,0 +1,201 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
+@import "./media.scss";
+
+*,
+body {
+  font-family: "Roboto", sans-serif;
+}
+
+.stats-new-container {
+  @include mds(mob) {
+    padding: 50px 0;
+  }
+}
+
+.stats-new-container .stats-new-title {
+  color: #000000;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+
+  margin-bottom: 20px;
+  @include mds(mob) {
+    font-size: 18px;
+  }
+}
+
+.stats-new-container__item a {
+  color: #667891;
+}
+
+// Stats Charts Container
+.stats-charts-container {
+  position: relative;
+  margin-bottom: 15px;
+  -webkit-transition: height 2s;
+  -moz-transition: height 2s;
+  -ms-transition: height 2s;
+  -o-transition: height 2s;
+  transition: height 2s;
+  @include mds(desk) {
+    margin-bottom: 0;
+  }
+  .charts-item__row {
+    display: flex;
+    align-items: center;
+    padding-bottom: 10px;
+    position: relative;
+    z-index: 2;
+    -webkit-transition: opacity 1s;
+    -moz-transition: opacity 1s;
+    -ms-transition: opacity 1s;
+    -o-transition: opacity 1s;
+    transition: opacity 1s;
+    &:nth-child(n + 11) {
+      opacity: 0;
+      display: none;
+    }
+    .charts-item__title {
+      width: 110px;
+      color: #000000;
+      font-size: 12px;
+      text-align: right;
+      padding-right: 12px;
+      @include mds(mob) {
+        width: 30%;
+        font-size: 14px;
+      }
+    }
+    .charts-item__bar {
+      width: 200px;
+      flex-grow: 1;
+      height: 30px;
+      color: #ffffff;
+      > .charts__bar__counter {
+        width: 10%;
+        display: block;
+        padding: 0 5px;
+        font-size: 12px;
+        text-align: right;
+
+        -webkit-transition: width 4s;
+        -moz-transition: width 4s;
+        -ms-transition: width 4s;
+        -o-transition: width 4s;
+        transition: width 4s;
+        background-image: linear-gradient(
+          to right,
+          #0079b5,
+          #06425d 42%,
+          #001164
+        );
+        @include mds(mob) {
+          font-size: 12px;
+          padding: 5px 10px;
+        }
+      }
+    }
+  }
+  .charts-item__row:nth-child(-n + 3) {
+    .charts__bar__counter {
+      color: #f5a623;
+    }
+  }
+}
+
+// See More block
+.stats-chart-expand {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  z-index: 11;
+  position: relative;
+  &__link {
+    border: none;
+    color: #001164;
+    font-size: 16px;
+    background-color: #ffffff;
+
+    &:hover + i {
+      transform: translateY(10px);
+    }
+    + .fa-angle-down,
+    + .fa-angle-up {
+      display: block;
+      width: 100%;
+      position: relative;
+      -webkit-transition: transform 0.3s;
+      -moz-transition: transform 0.3s;
+      -ms-transition: transform 0.3s;
+      -o-transition: transform 0.3s;
+      transition: transform 0.3s;
+    }
+  }
+}
+
+// Stats Charts Grid
+.grid-steps {
+  display: flex;
+  position: relative;
+}
+
+.stats-charts-grid {
+  top: -5px;
+  right: 0;
+  height: 100%;
+  position: absolute;
+  z-index: 1;
+  display: none;
+  width: calc(100% - 110px);
+  @include mds(mob) {
+    display: block;
+    width: calc(70%);
+  }
+
+  .stats__grid__row {
+    height: 40px;
+    display: flex;
+    &:nth-child(even) {
+      background-color: #f4f6f9;
+    }
+    &:nth-child(n + 11) {
+      display: none;
+    }
+    .s__grid__block {
+      width: 10%;
+      height: 40px;
+      border-right: 1px solid rgba(102, 120, 145, 0.3);
+    }
+  }
+
+  .stats__grid__row:nth-last-child(1) .s__grid__block {
+    position: relative;
+    > span {
+      left: -4px;
+      bottom: -20px;
+      display: none;
+      position: absolute;
+      font-size: 12px;
+      @include mds(mob) {
+        display: inline;
+      }
+    }
+    &:nth-last-child(1) > *:nth-last-child(1) {
+      position: absolute;
+      right: -3px;
+      bottom: -20px;
+      display: none;
+      font-style: unset;
+      font-size: 12px;
+      @include mds(mob) {
+        display: inline;
+      }
+      @include mds(desk) {
+        right: -25px;
+      }
+    }
+  }
+}
