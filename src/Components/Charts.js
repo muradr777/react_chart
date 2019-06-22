@@ -4,7 +4,8 @@ import Grid from "./Grid";
 class Charts extends Component {
   state = {
     total: 4000,
-    limitStep: 3,
+    limit: 9,
+    perPage: 9,
     users: [],
     data: [
       {
@@ -56,6 +57,56 @@ class Charts extends Component {
         id: 9,
         name: "Hannah Graham",
         data: 305
+      },
+      {
+        id: 10,
+        name: "Dragana Zivkovic-Micunovic",
+        data: 3545
+      },
+      {
+        id: 11,
+        name: "Nana Patarashvili",
+        data: 3023
+      },
+      {
+        id: 12,
+        name: "Vanessa Hernandez",
+        data: 2670
+      },
+      {
+        id: 13,
+        name: "Marina Fursiy",
+        data: 2484
+      },
+      {
+        id: 14,
+        name: "Negrut Flori",
+        data: 1980
+      },
+      {
+        id: 15,
+        name: "Bruce King",
+        data: 1680
+      },
+      {
+        id: 16,
+        name: "Amanda Reynolds",
+        data: 1205
+      },
+      {
+        id: 17,
+        name: "Hannah Graham",
+        data: 654
+      },
+      {
+        id: 18,
+        name: "Amanda Reynolds",
+        data: 520
+      },
+      {
+        id: 19,
+        name: "Hannah Graham",
+        data: 305
       }
     ]
   };
@@ -72,20 +123,23 @@ class Charts extends Component {
   getBarWidth = data =>
     Math.round(((data * 100) / this.state.total) * 100) / 100 + "%";
 
-  setUsers = () => {};
+  getMoreUsers = () => {
+    const { limit, perPage } = this.state;
+    this.setState({ limit: limit + perPage });
+  };
 
   render() {
-    let { users } = this.state;
+    let { limit, data } = this.state;
 
-    users = users.slice(0, this.getMoreData());
+    const newData = data.slice(0, limit);
 
     return (
       <div className="stats-new-container">
         <div className="container">
           <div className="stats-new-title text-center">{this.props.title}</div>
           <section id="chart__stats" className="stats-charts-container">
-            {users.length !== 0 ? (
-              users.map(({ id, name, data }) => {
+            {newData.length !== 0 ? (
+              newData.map(({ id, name, data }) => {
                 let barStyle = {
                   width: this.getBarWidth(data)
                 };
@@ -107,17 +161,22 @@ class Charts extends Component {
               </div>
             )}
 
-            <Grid rows={users.length} cols={10} steps={this.getGridSteps()} />
+            <Grid rows={newData.length} cols={10} steps={this.getGridSteps()} />
           </section>
-          <div className="stats-chart-expand text-center">
-            <button
-              className="stats-chart-expand__link"
-              onClick={this.getMoreData}
-            >
-              See More
-            </button>
-            <i className="fa fa-angle-down" />
-          </div>
+
+          {newData.length < data.length ? (
+            <div className="stats-chart-expand text-center">
+              <button
+                className="stats-chart-expand__link"
+                onClick={this.getMoreUsers}
+              >
+                See More
+              </button>
+              <i className="fa fa-angle-down" />
+            </div>
+          ) : (
+            ""
+          )}
         </div>
       </div>
     );

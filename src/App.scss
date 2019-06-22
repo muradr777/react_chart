@@ -4,6 +4,12 @@
 *,
 body {
   font-family: "Roboto", sans-serif;
+  a,
+  button {
+    &:focus {
+      outline: none;
+    }
+  }
 }
 
 .stats-new-container {
@@ -31,11 +37,6 @@ body {
 .stats-charts-container {
   position: relative;
   margin-bottom: 15px;
-  -webkit-transition: height 2s;
-  -moz-transition: height 2s;
-  -ms-transition: height 2s;
-  -o-transition: height 2s;
-  transition: height 2s;
   @include mds(desk) {
     margin-bottom: 0;
   }
@@ -50,10 +51,7 @@ body {
     -ms-transition: opacity 1s;
     -o-transition: opacity 1s;
     transition: opacity 1s;
-    &:nth-child(n + 11) {
-      opacity: 0;
-      display: none;
-    }
+
     .charts-item__title {
       width: 110px;
       color: #000000;
@@ -161,9 +159,7 @@ body {
     &:nth-child(even) {
       background-color: #f4f6f9;
     }
-    &:nth-child(n + 11) {
-      display: none;
-    }
+
     .s__grid__block {
       width: 10%;
       height: 40px;
